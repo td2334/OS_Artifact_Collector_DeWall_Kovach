@@ -13,17 +13,18 @@ echo 'Current time: '$timeCurrent
 echo 'Timezone: '$timeZone
 echo 'Uptime: '${timeUptime}
 
+echo '>>>'
 #OS Version
 osNumber=$(uname -r)
 osName=$(uname -s)
 osKernelVersion=$(uname -r)
 
-echo
 echo 'OS Version'
 echo 'Current OS Version: '$osNumber
 echo 'Current OS Name: '$osName
 echo 'Current Kernel Version: '$osKernelVersion
 
+echo '>>>'
 #Hardware
 cpu=$(cat /proc/cpuinfo | grep 'model name')
 cpu=$(echo $cpu | sed 's/.*://')
@@ -42,21 +43,30 @@ echo 'Storage Space Total: '$totalHDD
 echo 'Mounted File Systems: '$mounted
 
 #Domain controller
-
+echo '>>>'
 #Hostname and Domain
 hostname=$(hostname)
 domainname=$(domainname)
 
-echo
 echo 'Hostname: '$hostname
 echo 'Domain Name: '$domainname
 
 #users
+echo '>>>'
+echo '/etc/passwd:'
+cat /etc/passwd
+echo '/etc/shadow'
+cat /etc/shadow
 
-#boot
+#services
+echo '>>>'
+ls /lib/systemd/system/*.service /etc/systemd/system/*.service
 
+echo '>>>'
 #scheduled tasks
+for user in $(cut -f1 -d: /etc/passwd); do echo $user; crontab -u $user -l; done
 
+echo '>>>'
 #Network
 arptable=$(arp)
 #mac address for all interfaces
@@ -102,12 +112,23 @@ echo 'Gateways: '$gateways
 
 #list of all installed software
 #compgen -c
+
+echo '>>>'
 #process list
+ps -aux
 
+echo '>>>'
 #Driver list
+lsmod
 
+echo '>>>'
 #list of files in downloads and documents for each user directory
+for i in $( ls /home ); do
+	ls /home/$i/Documents
+	ls /home/$i/Downloads
+done
 
+echo '>>>'
 #three custom (PATH, BASH location, BASH version)
 echo
 echo 'Path: '$PATH
