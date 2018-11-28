@@ -1,20 +1,98 @@
 from tkinter import *
 from tkinter import messagebox
-from tkinter import scrolledtext
 from paramiko import *
 from pypsrp.client import Client
-from io import StringIO
-from os import system
+import smtplib
+from email.message import EmailMessage
 from os import remove
 import subprocess
-import sys
 
 
 def text_window(text):
-    width, height = 100, 50
-    scroll_window = scrolledtext.ScrolledText(width=width, height=height, wrap='word')
-    scroll_window.insert(1.0, text)
-    scroll_window.pack(side=LEFT)
+    window = Tk()
+    S = Scrollbar(window)
+    T = Text(window, height=50, width=100)
+    S.pack(side=RIGHT, fill=Y)
+    T.pack(side=LEFT, fill=Y)
+    S.config(command=T.yview)
+    T.config(yscrollcommand=S.set)
+    T.insert(END, text)
+    mainloop()
+
+
+def buttonstack(list):
+    date_time = list[0]
+    os = list[1]
+    hardware = list[2]
+    user_info = list[3]
+    services = list[4]
+    scheduled_tasks = list[5]
+    network = list[6]
+    installed_software = list[7]
+    processes = list[7]
+    drivers = list[8]
+    downloads_documents = list[9]
+    more_os = list[10]
+
+    window = Tk()
+    osinfo = date_time + '\n' + os + '\n' + scheduled_tasks + '\n' + services + '\n' + network
+    osinfo = osinfo + '\n' + processes + '\n' + drivers + '\n' + more_os
+    osinfoButton = Button(window, text='OS Information', command=lambda: text_window(osinfo))
+    hardwareButton = Button(window, text='Hardware', command=lambda: text_window(hardware))
+    installedsoftwareButton = Button(window, text='Installed Software', command=lambda: text_window(installed_software))
+    fulluserinfo = user_info + '\n' + downloads_documents
+    userinfoButton = Button(window, text='User Info', command=lambda: text_window(fulluserinfo))
+    osinfoButton.grid(row=0)
+    hardwareButton.grid(row=1)
+    userinfoButton.grid(row=2)
+    installedsoftwareButton.grid(row=4)
+    mainloop()
+
+
+def buttonstackwindows(list):
+    date_time = list[0]
+    os = list[1]
+    cpu_info = list[2]
+    ram = list[3]
+    hdd = list[4]
+    hostname_domain = list[5]
+    user_info = list[6]
+    boot1 = list[7]
+    boot2 = list[8]
+    mac_table = list[9]
+    mac_interfaces = list[10]
+    routing_table = list[11]
+    ip_addresses = list[12]
+    dhcp_server = list[13]
+    dns_servers = list[14]
+    gateway = list[15]
+    listening_services = list[16]
+    connections = list[17]
+    dns_cache = list[18]
+    smb_share = list[19]
+    smb_printers = list[20]
+    wireless_profiles = list[21]
+    software = list[22]
+    processes = list[22]
+    drivers = list[23]
+
+    window = Tk()
+    osinfo = date_time + '\n' + os + '\n' + boot1 + '\n' + boot2 + '\n' + dns_cache + '\n' + smb_share
+    osinfo = osinfo + '\n' + smb_printers + '\n' + processes + '\n' + drivers + '\n' + wireless_profiles
+    osButton = Button(window, text='OS Information', command=lambda: text_window(osinfo))
+    hardwareinfo = cpu_info + '\n' + ram + '\n' + hdd
+    hardwareButton = Button(window, text='Hardware Information', command=lambda: text_window(hardwareinfo))
+    userButton = Button(window, text='User Information', command=lambda: text_window(user_info))
+    networkinfo = hostname_domain + '\n' + mac_table + '\n' + mac_interfaces + '\n' + routing_table
+    networkinfo = networkinfo + '\n' + ip_addresses + '\n' + dhcp_server + '\n' + dns_servers + '\n'
+    networkinfo = networkinfo + gateway + '\n' + listening_services + '\n' + connections
+    networkButton = Button(window, text='Network Info', command=lambda: text_window(networkinfo))
+    softwareButton = Button(window, text='Installed Software', command=lambda: text_window(software))
+    osButton.grid(row=0)
+    hardwareButton.grid(row=1)
+    userButton.grid(row=2)
+    networkButton.grid(row=3)
+    softwareButton.grid(row=4)
     mainloop()
 
 
@@ -29,18 +107,7 @@ def multiprompt(flag):
                 temp = ''
             else:
                 temp += line
-        date_time = list[0]
-        os = list[1]
-        hardware = list[2]
-        user_info = list[3]
-        services = list[4]
-        scheduled_tasks = list[5]
-        network = list[6]
-        # installed_software = list[7]
-        processes = list[7]
-        drivers = list[8]
-        downloads_documents = list[9]
-        more_os = list[10]
+        buttonstack(list)
 
     else:  # windows
         num_new = 0
@@ -59,33 +126,7 @@ def multiprompt(flag):
                 if "=" not in line:
                     temp += line
         file.close()
-        remove('temp')
-        date_time = list[0]
-        os = list[1]
-        cpu_info = list[2]
-        ram = list[3]
-        hdd = list[4]
-        hostname_domain = list[5]
-        user_info = list[6]
-        boot1 = list[7]
-        boot2 = list[8]
-        mac_table = list[9]
-        mac_interfaces = list[10]
-        routing_table = list[11]
-        ip_addresses = list[12]
-        dhcp_server = list[13]
-        dns_servers = list[14]
-        gateway = list[15]
-        listening_services = list[16]
-        connections = list[17]
-        dns_cache = list[18]
-        smb_share = list[19]
-        smb_printers = list[20]
-        wireless_profiles = list[21]
-        # software = list[22]
-        processes = list[22]
-        drivers = list[23]
-
+        buttonstackwindows(list)
 
 
 def runssh(fields):
