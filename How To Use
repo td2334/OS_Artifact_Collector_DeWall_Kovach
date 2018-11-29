@@ -1,2 +1,10 @@
 How to Use OS Artifact Collector 
 
+Run the python script from the directory as the powershell and bash scripts
+
+Ensure administrative or sudo privvlages on the system 
+
+Make sure you have the proper libraries installed 
+(paramiko, pypsrp, Tkinter, subprocess)
+
+Once program is running follow the prompts 
