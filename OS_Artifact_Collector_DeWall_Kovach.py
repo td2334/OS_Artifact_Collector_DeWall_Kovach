@@ -29,10 +29,10 @@ def buttonstack(list):
     scheduled_tasks = list[5]
     network = list[6]
     installed_software = list[7]
-    processes = list[7]
-    drivers = list[8]
-    downloads_documents = list[9]
-    more_os = list[10]
+    processes = list[8]
+    drivers = list[9]
+    downloads_documents = list[10]
+    more_os = list[11]
 
     window = Tk()
     osinfo = date_time + '\n' + os + '\n' + scheduled_tasks + '\n' + services + '\n' + network
@@ -73,8 +73,8 @@ def buttonstackwindows(list):
     smb_printers = list[20]
     wireless_profiles = list[21]
     software = list[22]
-    processes = list[22]
-    drivers = list[23]
+    processes = list[23]
+    drivers = list[24]
 
     window = Tk()
     osinfo = date_time + '\n' + os + '\n' + boot1 + '\n' + boot2 + '\n' + dns_cache + '\n' + smb_share
