@@ -8,4 +8,4 @@ Python 3.0 or later has to be installed on system
 
 Libraries required: pypsrp, tkinter, paramiko, and subprocess
 
-You require an Admionistrator Powershell Window if on Windows System 
+You require an Administrator Powershell Window if on Windows System 
